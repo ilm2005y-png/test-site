@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Учебные тесты</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="startScreen">
+    <h2>Введите ваше имя</h2>
+    <input type="text" id="studentName" placeholder="Имя ученика">
+
+    <h3>Выберите предмет</h3>
+    <select id="subject">
+        <option value="">-- выбрать --</option>
+        <option value="anatomy">Анатомия</option>
+        <option value="chemistry">Химия</option>
+        <option value="physics">Физика</option>
+    </select>
+
+    <br><br>
+    <button onclick="startTest()">Начать тест</button>
+    <button onclick="showJournal()">Журнал результатов</button>
+</div>
+
+<div id="testScreen" style="display:none;">
+    <h1 id="testTitle"></h1>
+    <p id="timer"></p>
+    <h2 id="question"></h2>
+
+    <button onclick="checkAnswer(0)"></button>
+    <button onclick="checkAnswer(1)"></button>
+    <button onclick="checkAnswer(2)"></button>
+</div>
+
+<div id="journalScreen" style="display:none;">
+    <h1>Журнал результатов</h1>
+    <div id="journalTable"></div>
+    <br>
+    <button onclick="exportCSV()">Экспорт в Excel (CSV)</button>
+    <button onclick="backToStart()">Назад</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
