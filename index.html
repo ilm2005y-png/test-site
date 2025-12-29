@@ -1,59 +1,168 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="tg">
 <head>
-    <meta charset="UTF-8">
-    <title>Учебные тесты</title>
+  <meta charset="UTF-8">
+  <title>Тести анатомия</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(120deg, #eef2f3, #d9e4ec);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .optionBtn {
+      background: #ecf0f1;
+      color: #2c3e50;
+      border: 1px solid #dcdcdc;
+    }
+
+    .optionBtn:hover {
+      background: #dfe6e9;
+    }
+
+    #testScreen,
+    #journalScreen {
+      display: none;
+    }
+
+    #timer {
+      text-align: center;
+      font-weight: bold;
+      color: #c0392b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="startScreen">
-    <h2>Введите имя</h2>
-    <input type="text" id="studentName" placeholder="Имя ученика">
+<div class="container">
 
-    <h3>Режим экзамена</h3>
-    <select id="mode" onchange="updateSelectors()">
-        <option value="">-- выбрать --</option>
-        <option value="ALL">Общий экзамен (все предметы)</option>
-        <option value="SUBJECT">Экзамен по предмету</option>
-        <option value="SECTION">Экзамен по разделу</option>
+  <h2>Системаи тести анатомия</h2>
+
+  <!-- НАСТРОЙКИ -->
+  <div id="setupScreen">
+    <label>Номи донишҷӯ</label>
+    <input id="studentName">
+
+    <label>Системаи анатомия</label>
+    <select id="system">
+      <option value="locomotor">Такягоҳӣ ва ҳаракат</option>
+      <option value="cardio">Дилу рагҳо</option>
+      <option value="respiratory">Нафаскашӣ</option>
+      <option value="digestive">Ҳозима</option>
+      <option value="nervous">Асаб</option>
     </select>
 
-    <div id="subjectBlock" style="display:none;">
-        <h3>Предмет</h3>
-        <select id="subject" onchange="updateSections()">
-            <option value="">-- выбрать --</option>
-            <option value="anatomy">Анатомия</option>
-            <option value="chemistry">Химия</option>
-        </select>
-    </div>
+    <label>Усули интихоб</label>
+    <select id="mode">
+      <option value="random">Случайӣ</option>
+      <option value="range">Диапазон</option>
+    </select>
 
-    <div id="sectionBlock" style="display:none;">
-        <h3>Раздел</h3>
-        <select id="section">
-            <option value="">-- выбрать --</option>
-        </select>
-    </div>
+    <label>Диапазон</label>
+    Аз <input type="number" id="rangeFrom" value="1">
+    То <input type="number" id="rangeTo" value="10">
 
-    <br><br>
-    <button onclick="startTest()">Начать тест</button>
-    <button onclick="showJournal()">Журнал</button>
-</div>
+    <label>Вақт (дақиқа)</label>
+    <input type="number" id="timeLimit" value="5">
 
-<div id="testScreen" style="display:none;">
-    <h1 id="testTitle"></h1>
-    <p id="timer"></p>
-    <h2 id="question"></h2>
+    <button onclick="startTest()">Оғози тест</button>
+  </div>
 
-    <button onclick="checkAnswer(0)"></button>
-    <button onclick="checkAnswer(1)"></button>
-    <button onclick="checkAnswer(2)"></button>
-</div>
+  <!-- ТЕСТ -->
+  <div id="testScreen">
+    <h3 id="timer"></h3>
+    <h3 id="question"></h3>
+    <div id="options"></div>
+  </div>
 
-<div id="journalScreen" style="display:none;">
-    <h1>Журнал</h1>
-    <div id="journalTable"></div>
-    <br>
-    <button onclick="backToStart()">Назад</button>
+  <!-- ЖУРНАЛ -->
+  <div id="journalScreen">
+    <h3>Журнали натиҷаҳо</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Ном</th>
+          <th>Балл</th>
+          <th>Фоиз</th>
+          <th>Баҳо</th>
+        </tr>
+      </thead>
+      <tbody id="journalBody"></tbody>
+    </table>
+
+    <!-- БЛОК ОШИБОК -->
+    <div id="mistakes"></div>
+
+    <button onclick="location.reload()">Тести нав</button>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
