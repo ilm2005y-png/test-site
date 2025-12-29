@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Учебные тесты</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="startScreen">
-    <h2>Введите ваше имя</h2>
+    <h2>Введите имя</h2>
     <input type="text" id="studentName" placeholder="Имя ученика">
 
-    <h3>Выберите предмет</h3>
-    <select id="subject">
+    <h3>Режим экзамена</h3>
+    <select id="mode" onchange="updateSelectors()">
         <option value="">-- выбрать --</option>
-        <option value="anatomy">Анатомия</option>
-        <option value="chemistry">Химия</option>
-        <option value="physics">Физика</option>
+        <option value="ALL">Общий экзамен (все предметы)</option>
+        <option value="SUBJECT">Экзамен по предмету</option>
+        <option value="SECTION">Экзамен по разделу</option>
     </select>
+
+    <div id="subjectBlock" style="display:none;">
+        <h3>Предмет</h3>
+        <select id="subject" onchange="updateSections()">
+            <option value="">-- выбрать --</option>
+            <option value="anatomy">Анатомия</option>
+            <option value="chemistry">Химия</option>
+        </select>
+    </div>
+
+    <div id="sectionBlock" style="display:none;">
+        <h3>Раздел</h3>
+        <select id="section">
+            <option value="">-- выбрать --</option>
+        </select>
+    </div>
 
     <br><br>
     <button onclick="startTest()">Начать тест</button>
-    <button onclick="showJournal()">Журнал результатов</button>
+    <button onclick="showJournal()">Журнал</button>
 </div>
 
 <div id="testScreen" style="display:none;">
@@ -35,10 +50,9 @@
 </div>
 
 <div id="journalScreen" style="display:none;">
-    <h1>Журнал результатов</h1>
+    <h1>Журнал</h1>
     <div id="journalTable"></div>
     <br>
-    <button onclick="exportCSV()">Экспорт в Excel (CSV)</button>
     <button onclick="backToStart()">Назад</button>
 </div>
 
