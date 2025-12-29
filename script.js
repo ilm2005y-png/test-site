@@ -1,206 +1,810 @@
-let studentName = "";
+/* ===== САВОЛҲО ===== */
+const allQuestions = [
+  {
+    system: "locomotor",
+    text: "? 420. Магзи сурхи устухон дар куҷо ҷойгир аст?",
+    options: [
+      "- холигии кафаси сина",
+      "- холигии косахонаи сар",
+      "- холигии канали сутунмӯҳра",
+      "+ холигии устухони найшакл"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 421. Устухонҳои одам асосан аз кадом бофта ташкил ёфтааст?",
+    options: [
+      "- эпителӣ",
+      "+ васлкунанда",
+      "- мушакӣ",
+      "- асабӣ"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 422. Чанд фоиз (%)-и устухонро пайвастагиҳои органикӣ ташкил медиҳанд?",
+    options: [
+      "- 50",
+      "- 72",
+      "+ 28",
+      "- 12,5"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 423. Кадом сафеда ба таркиби устухонҳо дохил аст?",
+    options: [
+      "- актин",
+      "+ оссеин",
+      "- фибрин",
+      "- миозин"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 424. Чанд фоиз (%)-и устухонро пайвастагиҳои ғайриорганикӣ ташкил медиҳанд?",
+    options: [
+      "- 50",
+      "+ 72",
+      "- 28",
+      "- 12,5"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 425. Дар расм кадом намудаи пайвастшавии устухонҳо тасвир ёфтааст?",
+    options: [
+      "+ муттаҳаррик",
+      "- ниммуттаҳаррик",
+      "- бехаракат",
+      "- бехаракати дандондор"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 426. Устухони найшакли дарози одамро муайян кунед.",
+    options: [
+      "+ рон",
+      "- кафи пой",
+      "- қулфак",
+      "- буғуми панҷа"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 427. Кадом моддаҳо ба устухон мустаҳкамӣ медиҳанд?",
+    options: [
+      "- сафедаҳо",
+      "- кислотаҳои нуклеинат",
+      "- равғанҳо",
+      "+ намакҳои минералӣ"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 428. Чанд фоиз (%)-и устухонро сафеда ташкил медиҳад?",
+    options: [
+      "- 15,7",
+      "+ 12,5",
+      "- 21,8",
+      "- 50"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 429. Чанд фоиз (%)-и устухонро чарбу ва карбогидрат ташкил мекунанд?",
+    options: [
+      "+ 15,7",
+      "- 12,5",
+      "- 21,8",
+      "- 50"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 430. Чанд фоиз (%)-и устухонро об ташкил медиҳад?",
+    options: [
+      "- 15,7",
+      "- 12,5",
+      "- 21,8",
+      "+ 50"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 431. Сафедаи устухонро нишон диҳед.",
+    options: [
+      "- актин",
+      "- гемоглобин",
+      "+ оссеин",
+      "- миозин"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 432. Чаро устухонро баъди дар маҳлули 10%-и кислота тар кардан гиреҳ бастан мумкин аст?",
+    options: [
+      "+ Пайвастагиҳои ғайриорганикӣ ҳал шуда, устухон нарм гашт",
+      "- Намакҳои калсий зиёд шуданд",
+      "- Моддаҳои органикӣ нест шуданд",
+      "- Устухон сахттар гардид"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 433. Устухонҳои кӯтоҳ бисёртар аз кадом модда таркиб ёфтаанд?",
+    options: [
+      "- мулоим",
+      "- сахт",
+      "- чандир",
+      "+ исфанҷмонанд"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 434. Устухонҳои суфта бисёртар аз кадом модда таркиб ёфтаанд?",
+    options: [
+      "- мулоим",
+      "- сахт",
+      "- чандир",
+      "+ зич ва исфанҷӣ"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 435. Танаи устухони найшакл аз кадом модда таркиб ёфтааст?",
+    options: [
+      "- мулоим",
+      "- исфанҷӣ",
+      "- чандир",
+      "+ сахту мустаҳкам"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 436. Воҳиди сохторию функсионалии мушакро муайян кунед.",
+    options: [
+      "- ҳисса",
+      "- нейрон",
+      "+ миосит",
+      "- нефрон"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 437. Воҳиди сохторию функсионалии устухонро муайян намоед.",
+    options: [
+      "- атсинус",
+      "- нейрон",
+      "+ остеон",
+      "- нефрон"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 438. Сараки устухони найшакл аз кадом модда таркиб ёфтааст?",
+    options: [
+      "- мулоим",
+      "- сахт",
+      "- чандир",
+      "+ исфанҷмонанд"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 439. Кадом намуди мушак дар расм бо рақами 1 нишон дода шудааст?",
+    options: [
+      "- яксара",
+      "+ дусара",
+      "- сесара",
+      "- чорсара"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 440. Дар холигии канали сутунмӯҳра чӣ ҷойгир аст?",
+    options: [
+      "- магзи сурхи устухон",
+      "+ хароммагз",
+      "- бофтаи чарбӣ",
+      "- магзи сар"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 441. Канали устухони найшакл бо кадом модда пур гардидааст?",
+    options: [
+      "+ магзи зарди устухон",
+      "- хароммагз",
+      "- магзи сурх",
+      "- магзи сар"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 442. Дар расм кадом намуди мушакҳо тасвир ёфтааст?",
+    options: [
+      "- мушаки суфта",
+      "- кундаланграхи дил",
+      "+ кундаланграхи скелетӣ",
+      "- мушаки суфтаи дил"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 443. Сараки устухони найшакл бо кадом модда пур шудааст?",
+    options: [
+      "+ магзи сурхи устухон",
+      "- хароммагз",
+      "- бофтаи чарбӣ",
+      "- магзи сар"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 444. Дар холигии косахонаи сар чӣ ҷойгир аст?",
+    options: [
+      "- магзи сурхи устухон",
+      "- хароммагз",
+      "- бофтаи чарбӣ",
+      "+ магзи сар"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 445. Кадом устухон дар қисми абруи косахонаи сар вуҷуд надорад?",
+    options: [
+      "- рухсора",
+      "- бинӣ",
+      "+ чакка",
+      "- ҷоғ"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 446. Ташаккули устухон дар синни чандсолагӣ ба анҷом мерасад?",
+    options: [
+      "- 12–14",
+      "+ 22–24",
+      "- 14–17",
+      "- 28–30"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 447. Дар расм кадом намудаи пайвастшавии устухонҳо нишон дода шудааст?",
+    options: [
+      "- муттаҳаррик",
+      "+ ниммуттаҳаррик",
+      "- бехаракат",
+      "- дандондор"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 448. Кадом устухон ҳангоми ҳаракаткунанда мебошад?",
+    options: [
+      "- рухсора",
+      "- бинӣ",
+      "- ҷоғи боло",
+      "+ ҷоғи поён"
+    ]
+  },
+  {
+    system: "locomotor",
+    text: "? 449. Устухони ҷуфти холигии косахонаи сарро муайян кунед.",
+    options: [
+      "- ҷоғи боло",
+      "- туршакл",
+      "+ чакка",
+      "- пушти сар"
+    ]
+  },
+  {
+  system: "locomotor",
+  text: "? 450. Мушак дар расм бо рақами 2 нишон додашударо муайян кунед.",
+  options: [
+    "- яксара",
+    "- дусара",
+    "+ сесара",
+    "- чорсара"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 451. Пайвастшавии ниммуттаҳаррики устухонҳо чӣ ном дорад?",
+  options: [
+    "- буғум",
+    "+ нимбуғум",
+    "- бехаракат",
+    "- дандона"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 452. Скелети чанбари китф кадом устухонҳоро дар бар мегирад?",
+  options: [
+    "- бозу ва оринҷ",
+    "+ шона ва қулфак",
+    "- банди даст ва бозу",
+    "- муҳраҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 453. Кадом устухонҳо магзи сурхи устухон доранд?",
+  options: [
+    "+ найшакл",
+    "- тағояк",
+    "- исфанҷӣ",
+    "- бандҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 454. Пайвастшавии муттаҳаррики устухонҳо чӣ ном дорад?",
+  options: [
+    "+ буғум",
+    "- нимбуғум",
+    "- бехаракат",
+    "- дандона"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 455. Дар пайвастшавии муттаҳаррик устухонҳо бо ёрии чӣ пайваст мешаванд?",
+  options: [
+    "- дискҳо",
+    "- дандонаҳо",
+    "+ буғумҳо",
+    "- менискҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 456. Дар расм кадом намуди мушакҳо тасвир ёфтааст?",
+  options: [
+    "- мушаки суфта",
+    "+ кундаланграхи дил",
+    "- кундаланграхи скелетӣ",
+    "- мушаки суфтаи дил"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 457. Дар пайвастшавии бехаракат устухонҳо бо ёрии чӣ пайваст мешаванд?",
+  options: [
+    "- дискҳо",
+    "+ дандонаҳо",
+    "- буғумҳо",
+    "- менискҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 458. Дар пайвастшавии ниммуттаҳаррик устухонҳо бо ёрии чӣ пайваст мешаванд?",
+  options: [
+    "+ дискҳо",
+    "- дандонаҳо",
+    "- буғумҳо",
+    "- бандҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 459. Кадом устухон дар қисми абруи косахонаи сар вуҷуд надорад?",
+  options: [
+    "- рухсора",
+    "+ фарқи сар",
+    "- ҷоғи боло",
+    "- коми сахт"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 460. Дар одам чанд ҷуфт қабурға дида мешавад?",
+  options: [
+    "- 10–12",
+    "+ 12",
+    "- 7",
+    "- 33–35"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 461. Дар расм кадом намудаи пайвастшавии устухонҳо тасвир ёфтааст?",
+  options: [
+    "- муттаҳаррик",
+    "- ниммуттаҳаррик",
+    "- бехаракат",
+    "+ бехаракати дандондор"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 462. Қисми озоди андоми болоро кадом устухонҳо ташкил медиҳанд?",
+  options: [
+    "- бозу ва кудак",
+    "- шона ва кудак",
+    "+ устухони банди даст ва бозу",
+    "- устухони китф ва муҳраҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 463. Скелети чанбари пой кадом устухонҳоро дар бар мегирад?",
+  options: [
+    "+ чорбанд ва устухони кос",
+    "- шона ва кудак",
+    "- устухони рон ва сок",
+    "- устухони китф ва муҳраҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 464. Ду хамии пеши сутунмӯҳра чӣ ном дорад?",
+  options: [
+    "- скалиоз",
+    "+ лордоз",
+    "- кифоз",
+    "- кифоскалиоз"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 465. Ду хамии қафои сутунмӯҳраро чӣ меноманд?",
+  options: [
+    "- скалиоз",
+    "- лордоз",
+    "+ кифоз",
+    "- кифоскалиоз"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 466. Каҷшавии сутунмӯҳра ба тарафи пахлу чӣ ном дорад?",
+  options: [
+    "+ скалиоз",
+    "- лордоз",
+    "- кифоз",
+    "- кифоскалиоз"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 467. Қисми озоди андоми поёнро кадом устухонҳо ташкил медиҳанд?",
+  options: [
+    "- чорбанд ва кудак",
+    "- шона ва кудак",
+    "+ устухони рон ва сок",
+    "- устухони китф ва муҳраҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 468. Кадом қисми устухон дар расм бо ҳарфи А тасвир ёфтааст?",
+  options: [
+    "- диафиз",
+    "- метафиз",
+    "+ эпифизи болоӣ",
+    "- эпифизи поёнӣ"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 469. Қисми озоди андоми болоро кадом устухонҳо ташкил медиҳанд?",
+  options: [
+    "- чорбанд ва рон",
+    "- шона ва кудак",
+    "+ устухони банди даст ва панҷахо",
+    "- устухони китф ва муҳраҳо"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 470. Кадоме аз мушакҳои дар зер овардашуда ба бофтаи мушаки суфта дохил намешавад?",
+  options: [
+    "- девораи меъда",
+    "- девораи раҳхо",
+    "- девораи пешобдон",
+    "+ девораи дил"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 471. Қисми абруи косахонаи сар аз чанд устухон иборат аст?",
+  options: [
+    "+ 15",
+    "- 220",
+    "- 5",
+    "- 12"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 472. Мисоли пайвастшавии ниммуттаҳаррики устухонҳоро муайян кунед.",
+  options: [
+    "- устухони рон",
+    "+ сутунмӯҳра",
+    "- косахонаи сар",
+    "- устухони зону"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 473. Кадом устухон ба скелети холиси дастии одам дохил аст?",
+  options: [
+    "- куфак",
+    "+ соид",
+    "- сок",
+    "- шона"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 474. Дар расм кадом намуди мушакҳо тасвир ёфтааст?",
+  options: [
+    "+ мушаки суфта",
+    "- кундаланграхи дил",
+    "- кундаланграхи скелетӣ",
+    "- мушаки суфтаи дил"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 475. Қисми озоди андоми поёнро кадом устухонҳо ташкил медиҳанд?",
+  options: [
+    "- бозу ва кудак",
+    "- шона ва кудак",
+    "+ устухони сок ва поёни пой",
+    "- устухони чорбанд ва кос"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 476. Кадом устухон ба скелети холиси пойи одам дохил аст?",
+  options: [
+    "- кудак",
+    "- соид",
+    "+ сок",
+    "- шона"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 477. Магзи сурхи устухон ба кадом сохтори организм дохил мешавад?",
+  options: [
+    "- бофтаи чарбӣ",
+    "- бофтаи асаб",
+    "- пешқои лимфагӣ",
+    "+ узви хунсоз (хунофар)"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 478. Холигии косахонаи сар аз чанд устухон иборат аст?",
+  options: [
+    "- 15",
+    "- 220",
+    "+ 5",
+    "- 12"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 479. Ҳангоми ҳосилшавии унсурҳои хун дар магзи сурхи устухон скелет кадом вазифаро иҷро мекунад?",
+  options: [
+    "+ хунсозӣ (хунофар)",
+    "- нақлиётӣ",
+    "- муҳофизатӣ",
+    "- такягоҳӣ"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 480. Кадом устухон дар қисми холигии косахонаи сар вуҷуд надорад?",
+  options: [
+    "- пешонӣ",
+    "- пушти сар",
+    "- чакка",
+    "+ ҷоғ"
+  ]
+},
+{
+  system: "locomotor",
+  text: "? 481. Мувофиқати скелети дасту пой ва устухонҳоро муайян намоед.",
+  options: [
+    "+ скелети пой — рон",
+    "- скелети чанбари китф — сок",
+    "- скелети чанбари пой — шона",
+    "- скелети холиси даст — устухони кос"
+  ]
+}
+
+];
+
+
+/* ===== ТАҒЙИРЁБАНДАҲО ===== */
 let questions = [];
-let current = 0;
+let index = 0;
 let score = 0;
+let timeLeft = 0;
+let timer;
+let studentName = "";
 
-let timeLeft = 120;
-let timerInterval;
+/* ⭐ НОВОЕ: ответы ученика */
+let userAnswers = [];
 
-let currentInfo = "";
-
-const questionEl = document.getElementById("question");
-const buttons = document.querySelectorAll("#testScreen button");
-const titleEl = document.getElementById("testTitle");
-
-/* ===== ДАННЫЕ ===== */
-
-function makeQuestions(prefix) {
-    return Array.from({ length: 10 }, (_, i) => ({
-        text: `${prefix} — вопрос ${i + 1}`,
-        answers: ["A", "B", "C"],
-        correct: 0
-    }));
-}
-
-const tests = {
-    anatomy: {
-        heart: makeQuestions("Анатомия / Сердце"),
-        nervous: makeQuestions("Анатомия / Нервная система"),
-        respiration: makeQuestions("Анатомия / Дыхательная система")
-    },
-    chemistry: {
-        general: makeQuestions("Химия / Общая"),
-        organic: makeQuestions("Химия / Органическая"),
-        inorganic: makeQuestions("Химия / Неорганическая")
-    }
-};
-
-/* ===== ВЫБОР ===== */
-
-function updateSelectors() {
-    const mode = document.getElementById("mode").value;
-
-    document.getElementById("subjectBlock").style.display =
-        mode === "SUBJECT" || mode === "SECTION" ? "block" : "none";
-
-    document.getElementById("sectionBlock").style.display =
-        mode === "SECTION" ? "block" : "none";
-}
-
-function updateSections() {
-    const subject = document.getElementById("subject").value;
-    const section = document.getElementById("section");
-
-    section.innerHTML = `<option value="">-- выбрать --</option>`;
-    if (!subject) return;
-
-    for (let s in tests[subject]) {
-        const opt = document.createElement("option");
-        opt.value = s;
-        opt.textContent = s;
-        section.appendChild(opt);
-    }
-}
-
-/* ===== СТАРТ ===== */
-
+/* ===== ОҒОЗ ===== */
 function startTest() {
-    const name = document.getElementById("studentName").value.trim();
-    const mode = document.getElementById("mode").value;
-    const subject = document.getElementById("subject").value;
-    const section = document.getElementById("section").value;
+  studentName = document.getElementById("studentName").value.trim();
+  if (!studentName) {
+    alert("Лутфан номи худро ворид кунед");
+    return;
+  }
 
-    if (!name || !mode) {
-        alert("Заполните все поля");
-        return;
-    }
+  const systemEl = document.getElementById("system");
+  const modeEl = document.getElementById("mode");
+  const fromEl = document.getElementById("rangeFrom");
+  const toEl = document.getElementById("rangeTo");
+  const timeEl = document.getElementById("timeLimit");
 
-    studentName = name;
-    questions = [];
+  if (!systemEl || !modeEl || !fromEl || !toEl) {
+    alert("ХАТО: элементҳои диапазон ёфт нашуданд");
+    return;
+  }
 
-    if (mode === "ALL") {
-        for (let subj in tests)
-            for (let sec in tests[subj])
-                questions = questions.concat(tests[subj][sec]);
-        currentInfo = "Общий экзамен (все предметы)";
-    }
+  const system = systemEl.value;
+  const mode = modeEl.value;
+  const from = Number(fromEl.value);
+  const to = Number(toEl.value);
+  timeLeft = Number(timeEl.value) * 60;
 
-    if (mode === "SUBJECT") {
-        if (!subject) return alert("Выберите предмет");
-        for (let sec in tests[subject])
-            questions = questions.concat(tests[subject][sec]);
-        currentInfo = `Экзамен по предмету: ${subject}`;
-    }
+  let filtered = allQuestions.filter(q => q.system === system);
 
-    if (mode === "SECTION") {
-        if (!subject || !section) return alert("Выберите раздел");
-        questions = [...tests[subject][section]];
-        currentInfo = `Экзамен: ${subject} / ${section}`;
-    }
+  if (mode === "random") {
+    questions = [...filtered].sort(() => Math.random() - 0.5);
+  } else {
+    const startIndex = Math.max(0, from - 1);
+    const endIndex = Math.min(filtered.length, to);
+    questions = filtered.slice(startIndex, endIndex);
+  }
 
-    current = 0;
-    score = 0;
-    timeLeft = 120;
+  if (questions.length === 0) {
+    alert("Савол интихоб нашуд");
+    return;
+  }
 
-    titleEl.innerText = currentInfo;
+  index = 0;
+  score = 0;
+  userAnswers = [];
 
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("testScreen").style.display = "block";
+  document.getElementById("setupScreen").style.display = "none";
+  document.getElementById("testScreen").style.display = "block";
 
-    loadQuestion();
-    startTimer();
+  startTimer();
+  showQuestion();
 }
 
-function loadQuestion() {
-    if (current >= questions.length) {
-        showResult();
-        return;
-    }
-    questionEl.innerText = questions[current].text;
-    buttons.forEach((b, i) => b.innerText = questions[current].answers[i]);
-}
-
-function checkAnswer(i) {
-    if (i === questions[current].correct) score++;
-    current++;
-    loadQuestion();
-}
 
 /* ===== ТАЙМЕР ===== */
-
 function startTimer() {
-    const t = document.getElementById("timer");
-    t.innerText = `Время: ${timeLeft} сек`;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText =
+      "Вақти боқимонда: " + timeLeft + " сония";
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        t.innerText = `Время: ${timeLeft} сек`;
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            showResult();
-        }
-    }, 1000);
+    if (timeLeft <= 0) finishTest();
+  }, 1000);
 }
 
-/* ===== РЕЗУЛЬТАТ + ЖУРНАЛ ===== */
+/* ===== САВОЛ ===== */
+function showQuestion() {
+  const q = questions[index];
+  document.getElementById("question").innerText = q.text;
 
-function showResult() {
-    clearInterval(timerInterval);
+  const options = document.getElementById("options");
+  options.innerHTML = "";
 
-    const percent = Math.round((score / questions.length) * 100);
-    let grade = percent >= 90 ? 5 : percent >= 75 ? 4 : percent >= 50 ? 3 : 2;
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "optionBtn";
+    btn.innerText = opt.substring(2);
+    btn.onclick = () => answer(opt);
+    options.appendChild(btn);
+  });
+}
 
-    saveResult(percent, grade);
+/* ===== ҶАВОБ ===== */
+function answer(selectedOption) {
+  const q = questions[index];
 
-    questionEl.innerHTML = `
-        Ученик: <b>${studentName}</b><br>
-        ${currentInfo}<br>
-        Баллы: ${score}/${questions.length}<br>
-        Процент: ${percent}%<br>
-        Оценка: <b>${grade}</b>
+  const correctOption = q.options.find(o => o.startsWith("+"));
+
+  userAnswers.push({
+    question: q.text,
+    correct: correctOption.substring(2),
+    selected: selectedOption.substring(2),
+    isCorrect: selectedOption.startsWith("+")
+  });
+
+  if (selectedOption.startsWith("+")) score++;
+
+  index++;
+  if (index < questions.length) showQuestion();
+  else finishTest();
+}
+
+/* ===== АНҶОМ ===== */
+function finishTest() {
+  clearInterval(timer);
+
+  const total = questions.length;
+  const percent = Math.round((score / total) * 100);
+
+  const grade =
+    percent >= 90 ? "5 (Аъло)" :
+    percent >= 75 ? "4 (Хуб)" :
+    percent >= 60 ? "3 (Қаноатбахш)" :
+    "2 (Нокифоя)";
+
+  saveRecord({
+    name: studentName,
+    score: `${score} / ${total}`,
+    percent: percent + "%",
+    grade: grade
+  });
+
+  document.getElementById("testScreen").style.display = "none";
+  document.getElementById("journalScreen").style.display = "block";
+
+  renderJournal();
+  renderMistakes();
+}
+
+/* ===== ЖУРНАЛ ===== */
+function saveRecord(record) {
+  const journal = JSON.parse(localStorage.getItem("examJournal")) || [];
+  journal.push(record);
+  localStorage.setItem("examJournal", JSON.stringify(journal));
+}
+
+function renderJournal() {
+  const journal = JSON.parse(localStorage.getItem("examJournal")) || [];
+  const body = document.getElementById("journalBody");
+  body.innerHTML = "";
+
+  journal.forEach(r => {
+    body.innerHTML += `
+      <tr>
+        <td>${r.name}</td>
+        <td>${r.score}</td>
+        <td>${r.percent}</td>
+        <td>${r.grade}</td>
+      </tr>
     `;
-    buttons.forEach(b => b.style.display = "none");
+  });
 }
 
-function saveResult(percent, grade) {
-    const results = JSON.parse(localStorage.getItem("results")) || [];
-    results.push({
-        name: studentName,
-        exam: currentInfo,
-        score,
-        total: questions.length,
-        percent,
-        grade,
-        date: new Date().toLocaleString()
-    });
-    localStorage.setItem("results", JSON.stringify(results));
-}
+/* ⭐ НОВОЕ: показ ошибок */
+function renderMistakes() {
+  const container = document.getElementById("mistakes");
+  container.innerHTML = "<h3>Хатоҳои донишҷӯ</h3>";
 
-function showJournal() {
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("testScreen").style.display = "none";
-    document.getElementById("journalScreen").style.display = "block";
+  const wrong = userAnswers.filter(a => !a.isCorrect);
 
-    const data = JSON.parse(localStorage.getItem("results")) || [];
-    let html = `<table border="1">
-        <tr><th>Имя</th><th>Экзамен</th><th>Баллы</th><th>%</th><th>Оценка</th><th>Дата</th></tr>`;
+  if (wrong.length === 0) {
+    container.innerHTML += "<p>🎉 Хато нест! Офарин.</p>";
+    return;
+  }
 
-    data.forEach(r => {
-        html += `<tr>
-            <td>${r.name}</td>
-            <td>${r.exam}</td>
-            <td>${r.score}/${r.total}</td>
-            <td>${r.percent}</td>
-            <td>${r.grade}</td>
-            <td>${r.date}</td>
-        </tr>`;
-    });
-
-    html += `</table>`;
-    document.getElementById("journalTable").innerHTML = html;
-}
-
-function backToStart() {
-    document.getElementById("journalScreen").style.display = "none";
-    document.getElementById("startScreen").style.display = "block";
+  wrong.forEach((a, i) => {
+    container.innerHTML += `
+      <div style="margin-bottom:12px;">
+        <strong>${i + 1}. ${a.question}</strong><br>
+        ❌ Ҷавоби шумо: <span style="color:red">${a.selected}</span><br>
+        ✔️ Ҷавоби дуруст: <span style="color:green">${a.correct}</span>
+      </div>
+    `;
+  });
 }
